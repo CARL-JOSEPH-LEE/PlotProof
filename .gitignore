@@ -1,0 +1,28 @@
+# Local manuscripts and settings
+.plotproof/
+.env
+.env.*
+!.env.example
+
+# Python environments and generated files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.venv/
+build/
+dist/
+work/
+
+# Executables are local-only, wherever they are placed (all case variants).
+*.[eE][xX][eE]
+
+# Keep the distributable ZIP and checksum; ignore extracted application runtimes.
+/installers/*-windows-x64/
+
+# Editor / operating-system leftovers
+.DS_Store
+Thumbs.db
+*.tmp
+*.log

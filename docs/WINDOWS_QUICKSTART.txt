@@ -1,0 +1,52 @@
+PlotProof 0.2 — 原生桌面免安装版
+
+开始使用
+1. 把整个 ZIP 解压到一个普通文件夹。
+2. 双击 PlotProof.exe，直接进入独立桌面窗口。
+3. 点击“体验示例故事”，或导入自己的稿件。
+
+请将 PlotProof.exe 与 _internal 文件夹放在一起。
+本包已包含 Python 和 Qt 运行环境，无需另装 Python、Node.js、浏览器组件。
+不需要账号、激活码或购买授权。程序不会自动打开浏览器。
+
+完整工作流
+导入 TXT / Markdown / DOCX → 检查故事 → 并排核对证据 → 确认或记录解释。
+点击“定位原文”跳到稿件编辑器；改完后重新检查。
+“故事地图”展示跨章节的疑点连线和原文事实索引。
+“版本记录”可以恢复旧版本，恢复操作会保留后来的历史。
+导出支持 PDF、HTML、JSON；导出后不会自动启动其他应用。
+
+自动保存
+稿件草稿和审阅备注都会自动保存在本机。
+Ctrl+S 或开始检查会保存正式新版本；版本快照保存在 history 文件夹。
+默认数据目录：%LOCALAPPDATA%\PlotProof
+模型设置保留；模型服务凭据仅在当前进程内保存，退出后清空。
+关闭窗口就会退出程序。如果正在请求模型，会先取消并等当前请求结束。
+
+检查方式
+离线规则开箱即用，覆盖少量明确陈述。示例固定使用离线模式，不调用付费接口。
+更广泛的语义检查：在“检查方式与模型”中配置本机 Ollama 或兼容接口。
+本包不包含大模型权重。模型判断可能出错，最终由作者核对。
+当前支持每份稿件最多 300,000 字符。TXT 支持 UTF-8、带 BOM 的 UTF-16，以及 GB18030。
+DOCX 导入前请先接受或拒绝修订。PDF、旧版 DOC 和 OCR 不属于本版导入范围。
+
+快捷键
+Ctrl+O 导入，Ctrl+N 新建，Ctrl+S 保存版本，Ctrl+Enter 检查。
+Ctrl+F 搜索，Ctrl+1…4 切换工作区，Alt+↑/↓ 切换疑点。
+Ctrl+Shift+E 导出，F1 查看帮助。
+
+遇到问题
+先保留数据目录和稿件副本。不要删除 projects 或 history 文件夹。
+操作异常的日志会保存在数据目录 desktop-error.log；启动失败请查看 startup-error.log。
+源代码、测试与构建脚本均包含在 PlotProof-source.zip。
+
+English quick start
+Extract the entire ZIP, keep _internal beside PlotProof.exe, and double-click the EXE.
+PlotProof opens its own native desktop window. No Python, Node or browser setup is needed.
+Try a sample or import TXT, Markdown or DOCX. Compare evidence, make review decisions,
+edit your draft, run checks again, and export PDF / HTML / JSON.
+Drafts and notes autosave to %LOCALAPPDATA%\PlotProof. Saving creates version history.
+Closing the window exits the app; an active model request is cancelled cooperatively.
+Offline checks are deliberately limited. Optional semantic review uses your own model.
+The interface supports Chinese and English. Five full README translations are included.
+MIT application source; third-party libraries retain their licenses. See the notices.

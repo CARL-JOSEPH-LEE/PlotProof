@@ -1,0 +1,62 @@
+PlotProof 0.2 — native desktop architecture
+
+Application boundaries
+The EXE contains a native PySide6 / Qt Widgets interface. There is no browser,
+webview, JavaScript runtime, HTTP listener or frontend build step in the desktop.
+QLocalServer uses local IPC solely to focus an already running instance.
+A QLockFile protects the active data directory from duplicate desktop writers.
+The optional source-only JSON API in server.py is independent of the GUI.
+
+Code map
+desktop/app.py: application lifecycle, local instance lock, focus, error handler.
+desktop/window.py: library, review desk, editor, chapter map, revision history.
+desktop/widgets.py and theme.py: shared components and the native design system.
+desktop/dialogs.py: manuscript creation, model configuration and model discovery.
+desktop/worker.py: QThread worker with queued progress/result/error signals.
+desktop/reports.py: native PDF output through QTextDocument and QPdfWriter.
+importers.py: TXT/Markdown encodings and bounded DOCX text extraction.
+document.py: stable paragraph ids, normalized text, exact quote coordinates.
+engine.py and rules.py: fact extraction, bounded candidate review, source proof.
+storage.py: atomic projects, draft recovery, revision checkpoints, author decisions.
+preferences.py: durable model/language preferences without persisted credentials.
+
+Persistence and revisions
+Projects stay compatible with 0.1 JSON records. Drafts are stored separately from
+the committed text, with their base revision. Autosave flushes on navigation and
+close. A formal save or analysis commits the text, checkpoints the previous
+revision and clears the draft. Restoring creates a fresh revision, preserving
+later checkpoints. Project and checkpoint writes use fsync before atomic replace.
+Stale revisions cannot overwrite new text or attach findings to the wrong draft.
+Unreadable project files are retained and reported without blocking healthy ones.
+Archiving is reversible and keeps the original manuscript and review data.
+
+Evidence semantics
+Every accepted quotation must occur exactly once in its paragraph. Source offsets
+are Python Unicode code points; editor cursor positions are explicitly converted
+to Qt UTF-16 offsets. Changed drafts make findings read-only. Source navigation on
+an old report shows the old snapshot instead of highlighting unrelated current text.
+Review identities include intervening paragraphs so a changed explanation reopens
+the issue; unrelated edits outside the evidence span keep the author's decision.
+
+Analysis and lifecycle
+One review runs in a worker thread while the window stays responsive. Success is
+saved atomically; failure and cancellation preserve the previous report. Closing
+during work requests cancellation and waits for the current request to end before
+exiting. Network requests can take up to 120 seconds to time out. No thread is killed
+while it may be writing a report. Example review always uses offline rules.
+Ollama and compatible Chat Completions adapters use structured fact extraction,
+exact source verification and candidate interpretation. Model discovery is an
+explicit user action; service credentials stay in process memory.
+
+Native distribution
+PyInstaller creates a directory distribution. Qt shared libraries remain in
+_internal and are replaceable. The outer ZIP includes the EXE, libraries, notices,
+full application source, rebuild scripts and SHA-256 checksums for every file.
+No Node.js or browser engine is part of the native package.
+
+Known limits
+Offline rules are narrow. Alias resolution, implicit time semantics, arbitrary
+world rules and model quality are not generally solved. 300,000 characters per
+manuscript; at most 100 extracted facts per model batch and 120 candidate pairs.
+Partial coverage appears in report warnings. Real model evaluation remains a
+separate requirement from transport fixtures and UI acceptance tests.

@@ -1,0 +1,33 @@
+PlotProof 0.2 — third-party notices
+
+PlotProof's original application code is MIT licensed, copyright CARL JOSEPH LEE
+and contributors. Third-party components retain their own licenses.
+
+Python 3.12: Python Software Foundation license; see PYTHON_LICENSE.txt in the
+Windows package. Python source: https://www.python.org/downloads/source/
+Python's bundled OpenSSL, libffi and Microsoft runtime notices are included in
+the same PYTHON_LICENSE.txt file. Their terms apply to those components only.
+
+Qt 6.10.2, PySide6-Essentials 6.10.2 and Shiboken6 6.10.2:
+used under the GNU Lesser General Public License, version 3. The unmodified
+shared libraries are distributed separately in _internal and can be replaced
+with compatible builds. No restriction is imposed on reverse engineering for
+debugging modifications to those libraries. See licenses/LGPL-3.0-only.txt and
+licenses/GPL-3.0-only.txt. Qt contains additional third-party components; the
+license inventory is included in licenses/Qt-third-party-notices.html.
+
+Corresponding upstream source and build information:
+Qt: https://download.qt.io/archive/qt/6.10/6.10.2/submodules/
+Qt for Python: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.10.2-src/
+Qt repository: https://code.qt.io/cgit/qt/qtbase.git/tag/?h=v6.10.2
+PySide repository: https://code.qt.io/cgit/pyside/pyside-setup.git/tag/?h=v6.10.2
+Qt build instructions: https://doc.qt.io/qt-6.10/build-sources.html
+PySide build instructions: https://doc.qt.io/qtforpython-6/building_from_source/index.html
+
+PyInstaller 6.22.2: GPL with the PyInstaller bootloader exception. This exception
+permits distributing this application under its own license.
+https://pyinstaller.org/en/stable/license.html
+
+The included icons and cover illustration are original code-native assets under
+the project's MIT license. Native screenshots show the bundled fictional examples.
+There is no bundled Chromium, Electron, WebView, React or Node.js runtime.

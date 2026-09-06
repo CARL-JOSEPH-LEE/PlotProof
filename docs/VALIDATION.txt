@@ -1,0 +1,41 @@
+PlotProof 0.2 — validation record (2026-09-06)
+
+Tested environment
+Windows 11 x64, Python 3.12.10, PySide6-Essentials / Qt 6.10.2.
+Build tool: PyInstaller 6.22.2. Lint / formatting: Ruff 0.16.4.
+
+Automated acceptance
+43 tests cover the analysis core, source coordinates, stable review identities,
+revision conflicts, local HTTP adapters, imports, autosave and native Qt widgets.
+The native workflow tests click actual Qt buttons, wait for worker completion,
+verify the displayed finding list, autosave notes, confirm issues, edit manuscripts,
+block stale exports, rerun analysis, export PDF/HTML/JSON and restart the window.
+Additional native checks cover emoji/UTF-16 selection, project-isolated notes,
+offline-only sample review, and cancellation while closing the window.
+DOCX checks include headings, table text and unaccepted tracked changes.
+
+Manual Windows validation
+The actual native application window was opened and inspected with Windows UI
+Automation and screenshots. Library, evidence review and chapter map were checked.
+This is native desktop testing, not a browser preview.
+
+Packaged acceptance
+tools/smoke_windows.py copies the full distribution into a Chinese path with
+spaces, removes Python/Node development paths and Qt plugin overrides from the
+child environment, and executes the frozen native-widget acceptance sequence.
+PASS: all six frozen native-widget checks completed on 2026-09-06, including
+restart persistence and PDF/HTML/JSON exports. Diagnostics are printed to stdout;
+an optional --report path saves JSON. The build also isolates its DLL discovery
+PATH to avoid accidentally bundling incompatible libraries from developer tools.
+
+Scope of evidence
+These checks do not establish broad literary accuracy or support for every model.
+Model adapters are tested with a local HTTP fixture, not a live paid model.
+Synthetic samples are illustrative fixtures, not an accuracy benchmark.
+Cross-machine Windows validation and a fresh Windows VM remain future checks.
+
+Repository distribution
+installers contains the portable ZIP and its SHA-256 checksum. The extracted
+runtime directory and every case variant of .exe are excluded by .gitignore.
+The source archive includes the five READMEs, source, tests, build scripts and
+licenses; it excludes local manuscripts, environments and build intermediates.
